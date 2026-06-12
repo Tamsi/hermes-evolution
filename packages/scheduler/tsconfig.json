@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "outDir": "./dist", "rootDir": "./src" },
+  "include": ["src/**/*"],
+  "references": [
+    { "path": "../core" },
+    { "path": "../research" },
+    { "path": "../extraction" },
+    { "path": "../auditing" },
+    { "path": "../refactoring" },
+    { "path": "../evaluation" },
+    { "path": "../github" }
+  ]
+}

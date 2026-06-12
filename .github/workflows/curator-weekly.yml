@@ -1,0 +1,51 @@
+name: Hermes Curator Weekly
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+
+jobs:
+  curator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: livingcolor/hermes-skills
+          path: hermes-skills
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install hermes-skills dependencies
+        working-directory: hermes-skills
+        run: pnpm install --frozen-lockfile
+
+      - name: Build hermes-skills
+        working-directory: hermes-skills
+        run: pnpm build
+
+      - name: Install curator
+        run: pnpm install --frozen-lockfile
+
+      - name: Build curator
+        run: pnpm build
+
+      - name: Run curator pipeline
+        env:
+          CURATOR_SKILLS_PATH: ${{ github.workspace }}/hermes-skills/registry
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURATOR_TARGET_REPO: livingcolor/hermes-skills
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HERMES_LLM_PROVIDER: anthropic
+          CURATOR_MOCK_LLM: ${{ secrets.ANTHROPIC_API_KEY == '' && 'true' || '' }}
+        run: pnpm curator pr

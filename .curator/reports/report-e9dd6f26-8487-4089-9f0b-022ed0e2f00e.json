@@ -1,0 +1,108 @@
+{
+  "runId": "e9dd6f26-8487-4089-9f0b-022ed0e2f00e",
+  "startedAt": "2026-06-12T10:35:55.099Z",
+  "completedAt": "2026-06-12T10:35:55.511Z",
+  "findingsCount": 16,
+  "knowledgeCount": 14,
+  "audits": [
+    {
+      "skill": "drupal-reviewer",
+      "score": {
+        "skill": "drupal-reviewer",
+        "dimensions": {
+          "prompt_quality": 100,
+          "reasoning_quality": 86,
+          "tool_usage": 70,
+          "architecture_guidance": 100,
+          "evaluation_coverage": 90,
+          "guardrails": 62,
+          "maintainability": 84
+        },
+        "overall_score": 88,
+        "recorded_at": "2026-06-12T10:35:55.511Z"
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    {
+      "skill": "jira-analyst",
+      "score": {
+        "skill": "jira-analyst",
+        "dimensions": {
+          "prompt_quality": 100,
+          "reasoning_quality": 50,
+          "tool_usage": 70,
+          "architecture_guidance": 100,
+          "evaluation_coverage": 90,
+          "guardrails": 62,
+          "maintainability": 60
+        },
+        "overall_score": 80,
+        "recorded_at": "2026-06-12T10:35:55.511Z"
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    {
+      "skill": "qa-reviewer",
+      "score": {
+        "skill": "qa-reviewer",
+        "dimensions": {
+          "prompt_quality": 100,
+          "reasoning_quality": 86,
+          "tool_usage": 70,
+          "architecture_guidance": 100,
+          "evaluation_coverage": 90,
+          "guardrails": 50,
+          "maintainability": 60
+        },
+        "overall_score": 84,
+        "recorded_at": "2026-06-12T10:35:55.511Z"
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    {
+      "skill": "security-auditor",
+      "score": {
+        "skill": "security-auditor",
+        "dimensions": {
+          "prompt_quality": 100,
+          "reasoning_quality": 86,
+          "tool_usage": 70,
+          "architecture_guidance": 100,
+          "evaluation_coverage": 90,
+          "guardrails": 62,
+          "maintainability": 60
+        },
+        "overall_score": 86,
+        "recorded_at": "2026-06-12T10:35:55.511Z"
+      },
+      "issues": [],
+      "recommendations": []
+    },
+    {
+      "skill": "symfony-architect",
+      "score": {
+        "skill": "symfony-architect",
+        "dimensions": {
+          "prompt_quality": 100,
+          "reasoning_quality": 86,
+          "tool_usage": 70,
+          "architecture_guidance": 100,
+          "evaluation_coverage": 90,
+          "guardrails": 86,
+          "maintainability": 84
+        },
+        "overall_score": 90,
+        "recorded_at": "2026-06-12T10:35:55.511Z"
+      },
+      "issues": [],
+      "recommendations": []
+    }
+  ],
+  "patches": [],
+  "evaluationGates": [],
+  "markdownPath": "",
+  "jsonPath": ""
+}
