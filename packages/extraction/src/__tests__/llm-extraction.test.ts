@@ -5,6 +5,7 @@ import { LlmKnowledgeExtractor } from '../application/llm-knowledge-extractor.js
 import type { SourceFinding } from '@curator/core';
 
 const sampleFinding: SourceFinding = {
+  role: 'code-architect',
   source: 'Symfony CHANGELOG (8.2)',
   title: 'Deprecated container->get() in favor of constructor injection',
   finding: 'The container->get() method is deprecated when used outside compiled containers.',
@@ -20,7 +21,6 @@ describe('ExtractionResponseSchema', () => {
         {
           sourceIndex: 0,
           category: 'deprecation',
-          framework: 'symfony',
           practice: 'Replace container->get() with constructor injection using readonly properties.',
           importance: 'high',
           confidence: 0.9,
@@ -37,7 +37,7 @@ describe('MockStructuredKnowledgeExtractor', () => {
     const items = await extractor.extract([sampleFinding]);
     expect(items).toHaveLength(1);
     expect(items[0]?.practice).toContain('[mock-llm]');
-    expect(items[0]?.framework).toBe('symfony');
+    expect(items[0]?.role).toBe('code-architect');
   });
 });
 

@@ -1,19 +1,10 @@
 import type {
   ImportanceLevel,
   KnowledgeCategory,
-  KnowledgeFramework,
   RawKnowledge,
   SourceFinding,
 } from '@curator/core';
 import type { KnowledgeExtractorPort } from '@curator/core';
-
-const FRAMEWORK_HINTS: { pattern: RegExp; framework: KnowledgeFramework }[] = [
-  { pattern: /symfony/i, framework: 'symfony' },
-  { pattern: /drupal/i, framework: 'drupal' },
-  { pattern: /api platform|api-platform/i, framework: 'api-platform' },
-  { pattern: /doctrine/i, framework: 'doctrine' },
-  { pattern: /php/i, framework: 'php' },
-];
 
 export class RuleBasedKnowledgeExtractor implements KnowledgeExtractorPort {
   async extract(findings: SourceFinding[]): Promise<RawKnowledge[]> {
@@ -24,7 +15,7 @@ export class RuleBasedKnowledgeExtractor implements KnowledgeExtractorPort {
     const text = `${finding.title} ${finding.finding}`;
     return {
       category: inferCategory(text),
-      framework: inferFramework(finding.source, text),
+      role: finding.role,
       practice: toActionablePractice(text),
       importance: inferImportance(text),
       confidence: finding.confidence * 0.7,
@@ -45,16 +36,6 @@ function toActionablePractice(text: string): string {
     return `Apply security guidance: ${trimmed}`;
   }
   return trimmed;
-}
-
-function inferFramework(source: string, text: string): KnowledgeFramework {
-  const combined = `${source} ${text}`;
-  for (const hint of FRAMEWORK_HINTS) {
-    if (hint.pattern.test(combined)) {
-      return hint.framework;
-    }
-  }
-  return 'general';
 }
 
 function inferCategory(text: string): KnowledgeCategory {

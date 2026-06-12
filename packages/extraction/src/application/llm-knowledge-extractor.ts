@@ -124,7 +124,7 @@ export class LlmKnowledgeExtractor implements KnowledgeExtractorPort {
           }
           return {
             category: item.category,
-            framework: item.framework,
+            role: source.role ?? 'code-architect',
             practice: item.practice.trim(),
             importance: item.importance,
             confidence: Math.min(item.confidence, source.confidence),

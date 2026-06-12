@@ -8,7 +8,7 @@ export class KnowledgeNormalizer implements KnowledgeNormalizerPort {
     const map = new Map<string, KnowledgeItem>();
 
     for (const item of raw) {
-      const id = knowledgeId(item.practice, item.framework, item.category);
+      const id = knowledgeId(item.practice, item.role, item.category);
       const existing = map.get(id);
       if (existing) {
         if (!existing.sources.includes(item.sourceRef)) {
@@ -22,7 +22,7 @@ export class KnowledgeNormalizer implements KnowledgeNormalizerPort {
         map.set(id, {
           id,
           category: item.category,
-          framework: item.framework,
+          role: item.role,
           practice: item.practice,
           importance: item.importance,
           confidence: item.confidence,

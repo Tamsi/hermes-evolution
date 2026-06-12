@@ -7,6 +7,7 @@ import type { LLMProvider, LLMProviderFactory, LLMProviderName } from '@hermes/c
 
 const sampleFindings: SourceFinding[] = [
   {
+    role: 'code-architect',
     source: 'Symfony CHANGELOG (8.2)',
     title: 'Deprecated ServiceSubscriberInterface',
     finding:
@@ -16,6 +17,7 @@ const sampleFindings: SourceFinding[] = [
     confidence: 0.95,
   },
   {
+    role: 'code-architect',
     source: 'Drupal CHANGELOG (11.4.x)',
     title: 'Plugin discovery attributes',
     finding: 'Drupal 11 prefers PHP attributes over annotations for plugin discovery in new modules.',
@@ -51,7 +53,6 @@ describe('LlmKnowledgeExtractor integration', () => {
           {
             sourceIndex: 0,
             category: 'deprecation',
-            framework: 'symfony',
             practice:
               'Replace ServiceSubscriberInterface with constructor injection using readonly promoted properties.',
             importance: 'high',
@@ -60,7 +61,6 @@ describe('LlmKnowledgeExtractor integration', () => {
           {
             sourceIndex: 1,
             category: 'architecture',
-            framework: 'drupal',
             practice: 'Use PHP attributes for plugin discovery on Drupal 11 new code.',
             importance: 'high',
             confidence: 0.91,
@@ -73,10 +73,10 @@ describe('LlmKnowledgeExtractor integration', () => {
     const results = await extractor.extract(sampleFindings);
 
     expect(results).toHaveLength(2);
-    expect(results[0]?.framework).toBe('symfony');
+    expect(results[0]?.role).toBe('code-architect');
     expect(results[0]?.practice).toContain('constructor injection');
     expect(results[0]?.sourceRef).toContain('symfony');
-    expect(results[1]?.framework).toBe('drupal');
+    expect(results[1]?.role).toBe('code-architect');
     expect(results[1]?.practice).toContain('attributes');
   });
 
