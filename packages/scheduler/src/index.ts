@@ -115,7 +115,7 @@ export class CuratorPipeline {
 export function resolveDefaultPaths(projectRoot: string) {
   return {
     configPath: join(projectRoot, 'config', 'sources.yaml'),
-    skillsPath: process.env['CURATOR_SKILLS_PATH'] ?? join(projectRoot, '..', 'hermes-skills', 'registry'),
+    skillsPath: process.env['CURATOR_SKILLS_PATH'] ?? join(projectRoot, '..', 'livingcolor-skills', 'registry'),
     outputDir: join(projectRoot, '.curator', 'reports'),
     cacheDir: join(projectRoot, '.curator', 'cache'),
   };

@@ -1,4 +1,4 @@
-name: Hermes Curator Weekly
+name: LivingColor Evolution Weekly
 
 on:
   schedule:
@@ -13,8 +13,8 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: livingcolor/hermes-skills
-          path: hermes-skills
+          repository: Tamsi/livingcolor-skills
+          path: livingcolor-skills
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v4
@@ -26,12 +26,12 @@ jobs:
           node-version: '20'
           cache: pnpm
 
-      - name: Install hermes-skills dependencies
-        working-directory: hermes-skills
+      - name: Install livingcolor-skills dependencies
+        working-directory: livingcolor-skills
         run: pnpm install --frozen-lockfile
 
-      - name: Build hermes-skills
-        working-directory: hermes-skills
+      - name: Build livingcolor-skills
+        working-directory: livingcolor-skills
         run: pnpm build
 
       - name: Install curator
@@ -42,9 +42,9 @@ jobs:
 
       - name: Run curator pipeline
         env:
-          CURATOR_SKILLS_PATH: ${{ github.workspace }}/hermes-skills/registry
+          CURATOR_SKILLS_PATH: ${{ github.workspace }}/livingcolor-skills/registry
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CURATOR_TARGET_REPO: livingcolor/hermes-skills
+          CURATOR_TARGET_REPO: Tamsi/livingcolor-skills
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HERMES_LLM_PROVIDER: anthropic
           CURATOR_MOCK_LLM: ${{ secrets.ANTHROPIC_API_KEY == '' && 'true' || '' }}

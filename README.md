@@ -1,17 +1,17 @@
-# Hermes Curator
+# LivingColor Evolution
 
-Autonomous system that keeps [Hermes Skills](https://github.com/livingcolor/hermes-skills) up to date by monitoring role-aligned sources (security, architecture, QA, agile), auditing skills, and opening improvement PRs.
+Autonomous system that keeps [LivingColor Skills](https://github.com/Tamsi/livingcolor-skills) up to date by monitoring role-aligned sources (security, architecture, QA, agile), auditing skills, and opening improvement PRs.
 
 ## How it works
 
 ```
-Trend Scout → Extract → Normalize → Audit → Refactor → Evaluate → Pull Request
+Source Fetcher → Extract → Normalize → Audit → Refactor → Evaluate → Pull Request
 ```
 
 1. **Source Fetcher** fetches role-aligned sources from `config/sources.yaml`
 2. **Knowledge Extractor** turns raw findings into structured practices (LLM via `@hermes/runner`, fallback rule-based)
 3. **Knowledge Normalizer** deduplicates and merges sources
-4. **Skill Auditor** loads skills from `hermes-skills/registry/` and scores them
+4. **Skill Auditor** loads skills from `livingcolor-skills/registry/` and scores them
 5. **Skill Refactorer** proposes additive prompt patches
 6. **Evaluator** runs `@hermes/evaluator` — blocks regressions
 7. **PR Generator** opens a GitHub PR (or writes a local draft)
@@ -45,7 +45,7 @@ GITHUB_TOKEN=ghp_... pnpm curator pr
 
 | Variable | Description |
 |----------|-------------|
-| `CURATOR_SKILLS_PATH` | Path to skill registry (default: `../hermes-skills/registry`) |
+| `CURATOR_SKILLS_PATH` | Path to skill registry (default: `../livingcolor-skills/registry`) |
 | `CURATOR_TARGET_REPO` | GitHub target (`owner/repo`) |
 | `GITHUB_TOKEN` | Token for PR creation |
 | `CURATOR_ROOT` | Project root override |
@@ -53,7 +53,7 @@ GITHUB_TOKEN=ghp_... pnpm curator pr
 | `CURATOR_LLM_MODEL` | Optional model override (e.g. `claude-sonnet-4-20250514`) |
 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / … | Credentials for LLM extraction |
 | `CURATOR_MOCK_LLM` | Offline extraction without API (`true`) |
-| `HERMES_MOCK_LLM` | Same as `CURATOR_MOCK_LLM` (hermes-skills convention) |
+| `HERMES_MOCK_LLM` | Same as `CURATOR_MOCK_LLM` (livingcolor-skills convention) |
 
 **Default LLM selection:** first available among Anthropic → OpenAI → Gemini. Ollama is used only when `HERMES_LLM_PROVIDER=ollama` is set explicitly. Without any API key, extraction falls back to rule-based mode.
 

@@ -13,8 +13,8 @@ function projectRoot(): string {
 }
 
 function parseGithubTarget(): { owner: string; repo: string; baseBranch: string } {
-  const target = process.env['CURATOR_TARGET_REPO'] ?? 'livingcolor/hermes-skills';
-  const [owner = 'livingcolor', repo = 'hermes-skills'] = target.split('/');
+  const target = process.env['CURATOR_TARGET_REPO'] ?? 'Tamsi/livingcolor-skills';
+  const [owner = 'Tamsi', repo = 'livingcolor-skills'] = target.split('/');
   return { owner, repo, baseBranch: 'main' };
 }
 
@@ -59,13 +59,13 @@ async function executePipeline(options: {
 
 program
   .name('curator')
-  .description('Hermes Curator — autonomous AI Skills maintenance')
+  .description('LivingColor Evolution — autonomous AI Skills maintenance')
   .version('0.1.0');
 
 program
   .command('run')
   .description('Full pipeline: research → audit → report')
-  .option('--skills <path>', 'Path to hermes-skills registry')
+  .option('--skills <path>', 'Path to livingcolor-skills registry')
   .action(async (options: { skills?: string }) => {
     await executePipeline({ skillsPath: options.skills, openPr: false, dryRun: true });
   });
@@ -73,7 +73,7 @@ program
 program
   .command('audit')
   .description('Audit skills and print scores')
-  .option('--skills <path>', 'Path to hermes-skills registry')
+  .option('--skills <path>', 'Path to livingcolor-skills registry')
   .action(async (options: { skills?: string }) => {
     const root = projectRoot();
     const paths = resolveDefaultPaths(root);
@@ -98,7 +98,7 @@ program
   .command('pr')
   .description('Full pipeline and open GitHub PR (or draft in .curator/pr-drafts/)')
   .option('--dry-run', 'Write PR draft locally without calling GitHub API')
-  .option('--skills <path>', 'Path to hermes-skills registry')
+  .option('--skills <path>', 'Path to livingcolor-skills registry')
   .action(async (options: { dryRun?: boolean; skills?: string }) => {
     await executePipeline({
       skillsPath: options.skills,

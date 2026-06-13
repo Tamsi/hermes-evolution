@@ -1,8 +1,8 @@
 {
-  "name": "hermes-curator",
+  "name": "livingcolor-evolution",
   "version": "0.1.0",
   "private": true,
-  "description": "Autonomous system to maintain and improve Hermes AI Skills",
+  "description": "Autonomous system to maintain and improve LivingColor AI Skills",
   "license": "MIT",
   "author": "LivingColor",
   "engines": {
@@ -29,8 +29,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@hermes/core": "file:../hermes-skills/packages/core",
-      "@hermes/runner": "file:../hermes-skills/packages/runner"
+      "@hermes/core": "file:../livingcolor-skills/packages/core",
+      "@hermes/runner": "file:../livingcolor-skills/packages/runner"
     }
   }
 }

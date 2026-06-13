@@ -22,7 +22,7 @@ export class MarkdownReportWriter implements ReportWriterPort {
 
 function renderMarkdown(report: CuratorRunReport): string {
   const lines: string[] = [
-    `# Hermes Curator Report`,
+    `# LivingColor Evolution Report`,
     ``,
     `- **Run ID:** ${report.runId}`,
     `- **Started:** ${report.startedAt}`,

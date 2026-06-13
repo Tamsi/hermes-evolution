@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@curator/core": "workspace:*",
-    "@hermes/core": "file:../../../hermes-skills/packages/core",
-    "@hermes/evaluator": "file:../../../hermes-skills/packages/evaluator"
+    "@hermes/core": "file:../../../livingcolor-skills/packages/core",
+    "@hermes/evaluator": "file:../../../livingcolor-skills/packages/evaluator"
   },
   "devDependencies": { "vitest": "^2.1.8" }
 }

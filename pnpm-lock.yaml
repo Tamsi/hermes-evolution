@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@hermes/core': file:../hermes-skills/packages/core
-  '@hermes/runner': file:../hermes-skills/packages/runner
+  '@hermes/core': file:../livingcolor-skills/packages/core
+  '@hermes/runner': file:../livingcolor-skills/packages/runner
 
 importers:
 
@@ -43,11 +43,11 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@hermes/core':
-        specifier: file:../../../hermes-skills/packages/core
-        version: file:../hermes-skills/packages/core
+        specifier: file:../../../livingcolor-skills/packages/core
+        version: file:../livingcolor-skills/packages/core
       '@hermes/evaluator':
-        specifier: file:../../../hermes-skills/packages/evaluator
-        version: file:../hermes-skills/packages/evaluator
+        specifier: file:../../../livingcolor-skills/packages/evaluator
+        version: file:../livingcolor-skills/packages/evaluator
     devDependencies:
       vitest:
         specifier: ^2.1.8
@@ -85,11 +85,11 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@hermes/core':
-        specifier: file:../../../hermes-skills/packages/core
-        version: file:../hermes-skills/packages/core
+        specifier: file:../../../livingcolor-skills/packages/core
+        version: file:../livingcolor-skills/packages/core
       '@hermes/evaluator':
-        specifier: file:../../../hermes-skills/packages/evaluator
-        version: file:../hermes-skills/packages/evaluator
+        specifier: file:../../../livingcolor-skills/packages/evaluator
+        version: file:../livingcolor-skills/packages/evaluator
     devDependencies:
       vitest:
         specifier: ^2.1.8
@@ -101,11 +101,11 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@hermes/core':
-        specifier: file:../../../hermes-skills/packages/core
-        version: file:../hermes-skills/packages/core
+        specifier: file:../../../livingcolor-skills/packages/core
+        version: file:../livingcolor-skills/packages/core
       '@hermes/runner':
-        specifier: file:../../../hermes-skills/packages/runner
-        version: file:../hermes-skills/packages/runner
+        specifier: file:../../../livingcolor-skills/packages/runner
+        version: file:../livingcolor-skills/packages/runner
       zod:
         specifier: ^3.24.1
         version: 3.25.76
@@ -350,14 +350,14 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@hermes/core@file:../hermes-skills/packages/core':
-    resolution: {directory: ../hermes-skills/packages/core, type: directory}
+  '@hermes/core@file:../livingcolor-skills/packages/core':
+    resolution: {directory: ../livingcolor-skills/packages/core, type: directory}
 
-  '@hermes/evaluator@file:../hermes-skills/packages/evaluator':
-    resolution: {directory: ../hermes-skills/packages/evaluator, type: directory}
+  '@hermes/evaluator@file:../livingcolor-skills/packages/evaluator':
+    resolution: {directory: ../livingcolor-skills/packages/evaluator, type: directory}
 
-  '@hermes/runner@file:../hermes-skills/packages/runner':
-    resolution: {directory: ../hermes-skills/packages/runner, type: directory}
+  '@hermes/runner@file:../livingcolor-skills/packages/runner':
+    resolution: {directory: ../livingcolor-skills/packages/runner, type: directory}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1247,20 +1247,20 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@hermes/core@file:../hermes-skills/packages/core':
+  '@hermes/core@file:../livingcolor-skills/packages/core':
     dependencies:
       yaml: 2.9.0
       zod: 3.25.76
 
-  '@hermes/evaluator@file:../hermes-skills/packages/evaluator':
+  '@hermes/evaluator@file:../livingcolor-skills/packages/evaluator':
     dependencies:
-      '@hermes/core': file:../hermes-skills/packages/core
-      '@hermes/runner': file:../hermes-skills/packages/runner
+      '@hermes/core': file:../livingcolor-skills/packages/core
+      '@hermes/runner': file:../livingcolor-skills/packages/runner
       yaml: 2.9.0
 
-  '@hermes/runner@file:../hermes-skills/packages/runner':
+  '@hermes/runner@file:../livingcolor-skills/packages/runner':
     dependencies:
-      '@hermes/core': file:../hermes-skills/packages/core
+      '@hermes/core': file:../livingcolor-skills/packages/core
 
   '@humanfs/core@0.19.2':
     dependencies:
