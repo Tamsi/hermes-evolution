@@ -16,6 +16,7 @@ on:
 
 jobs:
   curator:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.plugin_skills_ref == '' || inputs.plugin_skills_commit == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +61,6 @@ jobs:
         run: pnpm curator pr
 
   plugin-lock-bump:
-    needs: curator
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.plugin_skills_ref != '' && inputs.plugin_skills_commit != '' }}
     runs-on: ubuntu-latest
     steps:

@@ -23,6 +23,8 @@ interface GitHubPullRequestResponse {
   number: number;
 }
 
+const EXPECTED_SKILLS = ['ticket-analyst', 'code-architect', 'qa-reviewer', 'security-auditor'];
+
 export class GitHubPluginLockBumpService implements PluginLockBumpPort {
   constructor(
     private readonly config: PluginLockBumpConfig,
@@ -30,6 +32,8 @@ export class GitHubPluginLockBumpService implements PluginLockBumpPort {
   ) {}
 
   async create(request: PluginLockBumpRequest): Promise<PullRequestResult | null> {
+    validatePluginLockBumpRequest(request);
+
     if (request.dryRun || !this.config.token) {
       return null;
     }
@@ -98,6 +102,54 @@ export class GitHubPluginLockBumpService implements PluginLockBumpPort {
 
     return (await response.json()) as T;
   }
+}
+
+function validatePluginLockBumpRequest(request: PluginLockBumpRequest): void {
+  if (request.skillsRepo !== 'Tamsi/livingcolor-skills') {
+    throw new Error('Invalid skillsRepo: expected Tamsi/livingcolor-skills');
+  }
+
+  if (isMovingOrBranchLikeRef(request.skillsRef)) {
+    throw new Error('Invalid skillsRef: expected an immutable tag-like ref');
+  }
+
+  if (!/^[0-9a-f]{40}$/.test(request.resolvedCommit)) {
+    throw new Error('Invalid resolvedCommit: expected a lowercase 40-character SHA');
+  }
+
+  if (request.bundle !== 'code-review-pipeline') {
+    throw new Error('Invalid bundle: expected code-review-pipeline');
+  }
+
+  if (!Array.isArray(request.skills) || request.skills.length === 0) {
+    throw new Error('Invalid skills: expected a non-empty skills array');
+  }
+
+  if (request.skills.some((skill) => typeof skill !== 'string' || skill.trim() === '')) {
+    throw new Error('Invalid skills: expected non-empty string values');
+  }
+
+  if (
+    request.skills.length !== EXPECTED_SKILLS.length ||
+    EXPECTED_SKILLS.some((skill, index) => request.skills[index] !== skill)
+  ) {
+    throw new Error(`Invalid skills: expected ${EXPECTED_SKILLS.join(', ')}`);
+  }
+}
+
+function isMovingOrBranchLikeRef(ref: string): boolean {
+  const trimmedRef = ref.trim();
+  const lowerRef = trimmedRef.toLowerCase();
+
+  if (['main', 'master', 'develop', 'dev'].includes(lowerRef)) {
+    return true;
+  }
+
+  if (lowerRef.startsWith('refs/heads/')) {
+    return true;
+  }
+
+  return trimmedRef.includes('/') && !lowerRef.startsWith('refs/tags/');
 }
 
 function buildLockContent(request: PluginLockBumpRequest): string {

@@ -124,4 +124,35 @@ describe('GitHubPluginLockBumpService', () => {
     await expect(service.create(request)).resolves.toBeNull();
     expect(fetchImpl).not.toHaveBeenCalled();
   });
+
+  it.each(['main', ' refs/heads/main ', 'feature/foo'])(
+    'rejects moving or branch-like skills ref %s before GitHub API calls',
+    async (skillsRef) => {
+      const fetchImpl = vi.fn<typeof fetch>();
+      const service = new GitHubPluginLockBumpService(config, fetchImpl);
+
+      await expect(service.create({ ...request, skillsRef })).rejects.toThrow(/skillsRef/i);
+      expect(fetchImpl).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    '01234567',
+    '0123456789ABCDEF0123456789ABCDEF01234567',
+    '0123456789abcdef0123456789abcdef0123456g',
+  ])('rejects invalid resolved commit %s before GitHub API calls', async (resolvedCommit) => {
+    const fetchImpl = vi.fn<typeof fetch>();
+    const service = new GitHubPluginLockBumpService(config, fetchImpl);
+
+    await expect(service.create({ ...request, resolvedCommit })).rejects.toThrow(/resolvedCommit/i);
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
+
+  it('rejects unexpected skills before GitHub API calls', async () => {
+    const fetchImpl = vi.fn<typeof fetch>();
+    const service = new GitHubPluginLockBumpService(config, fetchImpl);
+
+    await expect(service.create({ ...request, skills: ['ticket-analyst'] })).rejects.toThrow(/skills/i);
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
 });
