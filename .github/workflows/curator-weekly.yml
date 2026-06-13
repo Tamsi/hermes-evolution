@@ -83,6 +83,7 @@ jobs:
 
       - name: Open plugin lock bump PR
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # This token must have contents:write and pull_requests:write on Tamsi/livingcolor-plugin.
+          GITHUB_TOKEN: ${{ secrets.LIVINGCOLOR_PLUGIN_PR_TOKEN }}
           CURATOR_PLUGIN_TARGET_REPO: Tamsi/livingcolor-plugin
         run: pnpm curator plugin-bump --skills-ref "${{ inputs.plugin_skills_ref }}" --resolved-commit "${{ inputs.plugin_skills_commit }}"
