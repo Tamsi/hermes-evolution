@@ -139,6 +139,11 @@ function validatePluginLockBumpRequest(request: PluginLockBumpRequest): void {
 
 function isMovingOrBranchLikeRef(ref: string): boolean {
   const trimmedRef = ref.trim();
+
+  if (trimmedRef === '' || trimmedRef !== ref) {
+    return true;
+  }
+
   const lowerRef = trimmedRef.toLowerCase();
 
   if (['main', 'master', 'develop', 'dev'].includes(lowerRef)) {

@@ -125,7 +125,7 @@ describe('GitHubPluginLockBumpService', () => {
     expect(fetchImpl).not.toHaveBeenCalled();
   });
 
-  it.each(['main', ' refs/heads/main ', 'feature/foo'])(
+  it.each(['', '   ', ' v0.2.0 ', 'main', ' refs/heads/main ', 'feature/foo'])(
     'rejects moving or branch-like skills ref %s before GitHub API calls',
     async (skillsRef) => {
       const fetchImpl = vi.fn<typeof fetch>();
